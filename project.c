@@ -24,14 +24,7 @@ char dir[100];
 int grep_LINE=0;
 char out[MAX*MAX];
 char outtemp[MAX*MAX];
-void out_window()
-{
-    if(out[strlen(out)-1]!='\n')
-    {
-        out[strlen(out)-1]='\n';
-    }
-    printf("%s",out);
-}
+
 int filen(char*dir)
 {
     int len=1;
@@ -86,7 +79,7 @@ int path_existance()
 int file_exsistance()
 
 {
-    FILE *f;
+    FILE*f;
     if (f = fopen(command_seprate[2], "r"))
     {
         fclose(f);
@@ -282,14 +275,14 @@ void insertstr()
     fclose(f);
     if(line>linecnt)
     {
-        printf("you cant do this");
+        printf("you cant do this\n");
         return;
     }
     else if(save_charc[line]<char_pos)
     {
         
         
-            printf("you cant do this");
+            printf("you cant do this\n");
 
             return;
         
@@ -356,9 +349,9 @@ void cat()
             flag = 0;
             continue;
         }
-        sprintf(outtemp,"%s", content);
-        strcat(out,outtemp);
+        printf("%s", content);
     }
+    printf("\n");
     fclose(f);
     return;
 }
@@ -496,7 +489,7 @@ void copy()
 }
 void cut()
 {
-     memset(clipboard,0,MAX);
+    memset(clipboard,0,MAX);
     copy();
     removestr();
      
@@ -630,67 +623,67 @@ switch(finstate)
     case 0:
     if(find_result)
     {
-        sprintf(outtemp,"%d\n",repeat[0]);
-        strcat(out,outtemp);
+        printf("%d\n",repeat[0]);
+        
         
 
     }
     else 
     {
-        sprintf(outtemp,"-1\n");
-        strcat(out,outtemp);
+        printf("-1\n");
+       
     }
     break;
     case 1:
     if(find_result)
     {
-        sprintf(outtemp,"%d\n",counter);
-        strcat(out,outtemp);
+        printf("%d\n",counter);
+        
 
     }
     else 
     {
-        sprintf(outtemp,"0\n");
-        strcat(out,outtemp);
+        printf("0\n");
+        
     }
     break;
     case 10:
     if(find_result && nat<=counter)
     {
-        sprintf(outtemp,"%d\n",repeat[nat-1]);
-        strcat(out,outtemp);
+        printf("%d\n",repeat[nat-1]);
+        
 
     }
     else 
     {
-        sprintf(outtemp,"0\n");
-        strcat(out,outtemp);
+        printf("0\n");
+        
     }
     break;
     case 100:
     if(find_result)
     {
-        sprintf(outtemp,"%d\n",repeatw[0]);
-        strcat(out,outtemp);
+        printf("%d\n",repeatw[0]);
+        
 
     }
     else 
     {
-        sprintf(outtemp,"-1\n");
-        strcat(out,outtemp);
+        printf("-1\n");
+        
     }
     break;
     case 110:
     if(find_result && nat<=counter)
     {
-        sprintf(outtemp,"%d\n",repeatw[nat-1]);
-        strcat(out,outtemp);
+        printf("%d\n",repeatw[nat-1]);
+        
 
     }
     else 
     {
-        sprintf(outtemp,"-1\n");
-        strcat(out,outtemp);
+        printf("-1\n");
+        
     }
     break;
     case 1000:
@@ -700,22 +693,22 @@ switch(finstate)
         {
             if(j!=0)
             {
-                sprintf(outtemp," , %d",repeat[j]);
-                strcat(out,outtemp);
+            printf(" , %d",repeat[j]);
+                
             }
             else
             {
-                sprintf(outtemp,"%d",repeat[j]);
-                strcat(out,outtemp);
+                printf("%d",repeat[j]);
+                
             }
         }
-        sprintf(outtemp,"\n");
-        strcat(out,outtemp);
+        printf("\n");
+        
     }
     else 
     {
-        sprintf(outtemp,"-1\n");
-        strcat(out,outtemp);
+        printf("-1\n");
+        
     }
     break;
     case 1100:
@@ -725,22 +718,22 @@ switch(finstate)
         {
             if(j!=0)
             {
-                sprintf(outtemp," , %d",repeatw[j]);
-                strcat(out,outtemp);
+                printf(" , %d",repeatw[j]);
+                
             }
             else
             {
-                sprintf(outtemp,"%d",repeatw[j]);
-                strcat(out,outtemp);
+                printf("%d",repeatw[j]);
+                
             }
         }
-        sprintf(outtemp,"\n");
-        strcat(out,outtemp);
+        printf("\n");
+        
     }
     else 
     {
-        sprintf(outtemp,"-1\n");
-        strcat(out,outtemp);
+        printf("-1\n");
+        
     }
     break;
     default:
@@ -937,14 +930,14 @@ void grep(int option)
                 strcat(out,outtemp);
                 if(copy[strlen(copy)-1] !='\n')
                 {
-                    sprintf(outtemp,"\n");
-                    strcat(out,outtemp);
+                    printf("\n");
+                    
                 }
             }
             else if(option==2)
             {
-                sprintf(outtemp,"%s\n",command_seprate[2]);
-                strcat(out,outtemp);
+                printf("%s\n",command_seprate[2]);
+                
             }
 
 
@@ -971,17 +964,17 @@ void a_tree(char*rootdir,int root)
             {
                 if(i%2==0 || i==0)
                 {
-                    sprintf(outtemp,"%c",179);
-                    strcat(out,outtemp);
+                    printf("%c",179);
+                    
                 }
                 else
                 {
-                    sprintf(outtemp," ");
-                    strcat(out,outtemp);
+                    printf(" ");
+                    
                 }
             }
-            sprintf(outtemp,"|__%s\n",dead->d_name);
-            strcat(out,outtemp);
+            printf("%c%c%s\n",195,196,dead->d_name);
+            
 
             strcpy(path,rootdir);
             strcat(path,"/");
@@ -1008,18 +1001,18 @@ void tree_specific_depth(char*rootdir,int root,int depth)
             {
                 if(i%2==0 || i==0)
                 {
-                    sprintf(outtemp,"|",179);
-                    strcat(out,outtemp);
+                    printf("%c",179);
+                    
                 }
                 else
                 {
-                    sprintf(outtemp," ");
-                    strcat(out,outtemp);
+                    printf(" ");
+                    
 
                 }
             }
-            sprintf("|__%s\n",dead->d_name);
-            strcat(out,outtemp);
+            printf("%c%c%s\n",195,196,dead->d_name);
+            
             strcpy(path,rootdir);
             strcat(path,"/");
             strcat(path,dead->d_name);
@@ -1058,14 +1051,14 @@ void undo()
 {
     if (!path_existance(command_seprate[2]))
     {
-        sprintf(outtemp,"path is wrong\n!");
-        strcat(out,outtemp);
+        printf("path is wrong\n!");
+        
         return;
     }
     if (!file_exsistance(command_seprate[2]))
     {
-        sprintf(outtemp,"file is wrong\n");
-        strcat(out,outtemp);
+        printf("file is wrong\n");
+        
         return;
     }
 
@@ -1092,8 +1085,8 @@ void undo()
     }
     fclose(f);
     fclose(backup);
-    sprintf(outtemp,"undone!\n");
-    strcat(out,outtemp);
+    printf("undone!\n");
+    
 
 }
 void compare(int filen1,int filen2)
@@ -1113,24 +1106,24 @@ void compare(int filen1,int filen2)
         }
         if(strcmp(exe_f1,exe_f2))
         {
-            sprintf(outtemp,"============ #%d ============\n",linecount);
-            strcat(out,outtemp);
+            printf("============ #%d ============\n",linecount);
+            
 
         
         if(linecount!=filen1 && linecount!=filen2)
         {
-            sprintf(outtemp,"%s%s",exe_f1,exe_f2);
-            strcat(out,outtemp);
+            printf("%s%s",exe_f1,exe_f2);
+            
         }
         else if(linecount==filen1)
         {
-            sprintf("%s\n%s",exe_f1,exe_f2);
-            strcat(out,outtemp);
+            printf("%s\n%s",exe_f1,exe_f2);
+            
         }
         else if(linecount==filen2)
         {
-            sprintf(outtemp,"%s%s\n",exe_f1,exe_f2);
-            strcat(out,outtemp);
+            printf("%s%s\n",exe_f1,exe_f2);
+            
         }
         }
         linecount++;
@@ -1141,12 +1134,12 @@ void compare(int filen1,int filen2)
     max=filen1-filen2;
     if(max>0)
     {
-        sprintf(outtemp,"<<<<<<<<<<<< #%d - #%d >>>>>>>>>>>>\n",linecount,filen1);
-        strcat(out,outtemp);
+        printf("<<<<<<<<<<<< #%d - #%d >>>>>>>>>>>>\n",linecount,filen1);
+        
         while(1)
         {
-            sprintf(outtemp,"%s",exe_f1);
-            strcat(out,outtemp);
+            printf("%s",exe_f1);
+            
             if(fgets(exe_f1,MAX+10,f1)==NULL)
             {
                 break;
@@ -1156,19 +1149,19 @@ void compare(int filen1,int filen2)
     }
     else if(max<0)
     {
-        sprintf(outtemp,">>>>>>>>>>>> #%d - #%d <<<<<<<<<<<<\n",linecount,filen2);
-        strcat(out,outtemp);
+        printf(">>>>>>>>>>>> #%d - #%d <<<<<<<<<<<<\n",linecount,filen2);
+        
         while(1)
         {
             if(fgets(exe_f2,MAX+10,f2)==NULL)
             {
                 break;
             }
-            sprintf(outtemp,"%s",exe_f2);
-            strcat(out,outtemp);
+            printf("%s",exe_f2);
+            
         }
-        sprintf(outtemp,"\n");
-        strcat(out,outtemp);
+        printf("\n");
+        
     }
     fclose(f1);
     fclose(f2);
@@ -1285,28 +1278,7 @@ void auto_indent()
 
    
 }
-int isarman()
-{
-    for(int i=0;command_seprate[i][0]!='\0';i++)
-    {
-        if(strcmp(command_seprate[i],"=D")==0)
-        {
-            return 1;
-        }
-    }
-    return 0;
-}
-int armanx()
-{
-    for(int i=0;command_seprate[i][0]!='\0';i++)
-    {
-        if(strcmp(command_seprate[i],"=D")==0)
-        {
-            return i;
-        }
-    }
-    
-}
+
 
 void execute_f()
 {
@@ -1338,387 +1310,7 @@ void execute_f()
         createfile(flagu);
         
     }
-    else if(isarman())
-    {
-        if (strcmp(command_seprate[0], "cat") == 0)
-    {
-         if (!path_existance(command_seprate[2]))
-    {
-        printf("path is wrong\n!");
-        return;
-        
-    }
-    if (!file_exsistance(command_seprate[2]))
-    {
-        printf("file is wrong\n");
-        return;
-        
-    }
-        undoexe();
-        cat();
-    }
-     else if(strcmp(command_seprate[0],"find")==0)
-    {
-        swap(command_seprate[2],command_seprate[4]);
-             if (!path_existance())
-    {
-        printf("path is wrong\n!");
-        return;
-        
-    }
-    if (!file_exsistance())
-    {
-        printf("file is wrong\n");
-        return;
-    }
-    swap(command_seprate[2],command_seprate[4]);
-       for(int i=0;i<strlen(command);i++)
-{
-    if(command[i]=='-')
-    {
-        if(command[i+1]=='c')
-        {
-            finstate=finstate+1;
-        }
-        if(command[i+1]=='a')
-        {
-            if(command[i+2]=='t')
-            {
-            finstate=finstate+10;
-            }
-        }
-        if(command[i+1]=='b')
-        {
-            finstate=finstate+100;
-        }
-        if(command[i+2]=='l')
-        {
-            finstate=finstate+1000;
-        }
-    }
    
-}
-for(int k=5;k<10;k++)
-{
-    for(int z=0;z<strlen(command_seprate[k]);z++)
-    {
-         if(command_seprate[k][z]>='0' && command_seprate[k][z]<='9')
-    {
-        nat=nat*10;
-        nat=nat+(int)(command_seprate[k][z]-'0');
-    }
-    }
-    }
-    
-    
-
-    if(finstate==0 || finstate==100 || finstate==110 || finstate==10 || finstate==1000 || finstate==1 || finstate==1100)
-    {
-        find();
-    }
-    else
-    {
-        sprintf(outtemp,"not right combination\n");
-        strcat(out,outtemp);
-
-
-    }
-    nat=0;
-    finstate=0;
-
-    
-    }
-     else if(strcmp(command_seprate[0],"grep")==0)
-    {
-
-        int option;
-        int start_file;
-        
-        if(strcmp(command_seprate[1],"--str")==0)
-        {
-            start_file=4;
-            option=0;
-             swap(command_seprate[1], command_seprate[3]);
-            
-        }
-        else if(strcmp(command_seprate[1],"-c")==0)
-        {
-            start_file=5;
-            option=1;
-             memset(command_seprate[1], 0, MAX);
-            swap(command_seprate[4], command_seprate[1]);
-            swap(command_seprate[3], command_seprate[4]);
-            swap(command_seprate[2], command_seprate[3]);
-            
-        }
-        else if(strcmp(command_seprate[1],"-l")==0)
-        {
-            start_file=5;
-            option=2;
-            memset(command_seprate[1], 0, MAX);
-            swap(command_seprate[4], command_seprate[1]);
-            swap(command_seprate[3], command_seprate[4]);
-            swap(command_seprate[2], command_seprate[3]);
-            
-        }
-        while(command_seprate[start_file][0]!=0)
-        {
-            swap(command_seprate[2],command_seprate[start_file]);
-            if (!path_existance(command_seprate[2]))
-    {
-        printf("path is wrong\n!");
-        return;
-    }
-    if (!file_exsistance(command_seprate[2]))
-    {
-        printf("file is wrong\n");
-        return;
-    }
-        
-        grep(option);
-        start_file++;
-
-        }
-        if(option==0)
-        {
-            sprintf(outtemp,"%d",grep_LINE);
-            strcat(out,outtemp);
-        }
-    }
-      else if(strcmp(command_seprate[0],"tree")==0)
-    {
-        long depth;
-        char *edepth;
-        depth=strtol(command_seprate[1],&edepth,10);
-        if(depth<-1)
-        {
-            sprintf(outtemp,"invalid depth");
-            strcat(out,outtemp);
-        }
-        else if(depth==0)
-        {
-            sprintf(outtemp,"\n");
-            strcat(out,outtemp);
-            
-        }
-        else if(depth==-1)
-        {
-            a_tree("./root",0);
-        }
-        
-        else
-        {
-            tree_specific_depth("./root",0,depth);
-        }
-    }
-    int armanpos=armanx();
-    for(int i=0;command_seprate[i+armanpos+1][0]='\0';i++)
-    {
-        swap(command_seprate[i],command_seprate[i+armanpos+1]);
-    }
-    if(strcmp(command_seprate[0],"insertstr")==0)
-    {
-        memset(command_seprate[6],0,MAX);
-        strncat(command_seprate[6],out,MAX);
-        swap(command_seprate[6],command_seprate[4]);
-            if (!path_existance(command_seprate[2]))
-    {
-        printf("path is wrong\n!");
-        return;
-    }
-    if (!file_exsistance(command_seprate[2]))
-    {
-        printf("file is wrong\n");
-        return;
-    }
-        memset(out,0,MAX);
-        undoexe();
-        insertstr();
-    }
-    else if(strcmp(command_seprate[0],"find")==0)
-    {
-        memset(command_seprate[7],0,MAX);
-        strncat(command_seprate[7],out,MAX);
-        swap(command_seprate[7],command_seprate[4]);
-           if (!path_existance())
-    {
-        printf("path is wrong\n!");
-        return;
-    }
-    if (!file_exsistance())
-    {
-        printf("file is wrong\n");
-        return;
-    }
-    swap(command_seprate[2],command_seprate[4]);
-       for(int i=0;i<strlen(command);i++)
-{
-    if(command[i]=='-')
-    {
-        if(command[i+1]=='c')
-        {
-            finstate=finstate+1;
-        }
-        if(command[i+1]=='a')
-        {
-            if(command[i+2]=='t')
-            {
-            finstate=finstate+10;
-            }
-        }
-        if(command[i+1]=='b')
-        {
-            finstate=finstate+100;
-        }
-        if(command[i+2]=='l')
-        {
-            finstate=finstate+1000;
-        }
-    }
-   
-}
-for(int k=5;k<10;k++)
-{
-    for(int z=0;z<strlen(command_seprate[k]);z++)
-    {
-         if(command_seprate[k][z]>='0' && command_seprate[k][z]<='9')
-    {
-        nat=nat*10;
-        nat=nat+(int)(command_seprate[k][z]-'0');
-    }
-    }
-    }
-    
-    
-
-    if(finstate==0 || finstate==100 || finstate==110 || finstate==10 || finstate==1000 || finstate==1 || finstate==1100)
-    {
-        memset(out,0,MAX);
-        find();
-    }
-    else
-    {
-        printf("not right combination\n");
-    }
-    nat=0;
-    finstate=0;
-    }
-    else if((command_seprate[0],"grep")==0)
-    {
-        
-        int option;
-        int start_file;
-        
-        if(strcmp(command_seprate[1],"--file")==0)
-        {
-            start_file=4;
-            option=0;
-            int k;
-             for( k=2;command_seprate[2+k][0]!='\0';k=k+2)
-             {
-                swap(command_seprate[2],command_seprate[2+k]);
-                swap(command_seprate[3],command_seprate[3+k]);
-             }
-             swap(command_seprate[2],command_seprate[2+k]);
-             swap(command_seprate[3],command_seprate[3+k]);
-             if(command_seprate[3+k][0]=='\0')
-             {
-                memset(command_seprate[2+k-armanpos],0,MAX);
-             }
-             else
-             {
-                memset(command_seprate[3+k-armanpos],0,MAX);
-             }
-             strcat(command_seprate[3],"--str");
-             strncat(command_seprate[2],out,MAX);
-            
-        }
-        else if(strcmp(command_seprate[1],"-c")==0)
-        {
-            start_file=5;
-            option=1;
-             memset(command_seprate[1], 0, MAX);
-            swap(command_seprate[2], command_seprate[1]);
-           int k;
-             for( k=2;command_seprate[3+k][0]!='\0';k=k+2)
-             {
-                swap(command_seprate[3],command_seprate[3+k]);
-                swap(command_seprate[4],command_seprate[4+k]);
-             }
-             swap(command_seprate[4],command_seprate[4+k]);
-             swap(command_seprate[3],command_seprate[3+k]);
-             if(command_seprate[4+k][0]=='\0')
-             {
-                memset(command_seprate[3+k-armanpos],0,MAX);
-             }
-             else
-             {
-                memset(command_seprate[3+4-armanpos],0,MAX);
-             }
-             strcat(command_seprate[3],"--str");
-             strncat(command_seprate[4],out,MAX);
-            
-        }
-        else if(strcmp(command_seprate[1],"-l")==0)
-        {
-            start_file=5;
-            option=2;
-            memset(command_seprate[1], 0, MAX);
-            swap(command_seprate[2], command_seprate[1]);
-            int k;
-             for( k=2;command_seprate[3+k][0]!='\0';k=k+2)
-             {
-                swap(command_seprate[3],command_seprate[3+k]);
-                swap(command_seprate[4],command_seprate[4+k]);
-             }
-             swap(command_seprate[4],command_seprate[4+k]);
-             swap(command_seprate[3],command_seprate[3+k]);
-             if(command_seprate[4+k][0]=='\0')
-             {
-                memset(command_seprate[3+k-armanpos],0,MAX);
-             }
-             else
-             {
-                memset(command_seprate[3+4-armanpos],0,MAX);
-             }
-             strcat(command_seprate[3],"--str");
-             strncat(command_seprate[4],out,MAX);
-            
-        }
-        memset(out,0,MAX);
-        while(command_seprate[start_file][0]!=0)
-        {
-            swap(command_seprate[2],command_seprate[start_file]);
-            if (!path_existance(command_seprate[2]))
-    {
-        printf("path is wrong\n!");
-        return;
-    }
-    if (!file_exsistance(command_seprate[2]))
-    {
-        printf("file is wrong\n");
-        return;
-    }
-        
-        grep(option);
-        start_file++;
-
-        }
-        if(option==0)
-        {
-            printf("%d",grep_LINE);
-        }
-
-
-    }
-    
-
-
-
-
-
-    }
-
     else if (strcmp(command_seprate[0], "insertstr") == 0)
     {
          if (!path_existance(command_seprate[2]))
@@ -1733,8 +1325,6 @@ for(int k=5;k<10;k++)
     }
         undoexe();
         insertstr();
-        out_window();
-        memset(out,0,MAX);
     }
     else if (strcmp(command_seprate[0], "cat") == 0)
     {
@@ -1750,8 +1340,6 @@ for(int k=5;k<10;k++)
     }
         undoexe();
         cat();
-         out_window();
-        memset(out,0,MAX);
     }
     else if (strcmp(command_seprate[0], "removestr") == 0)
     {
@@ -1767,8 +1355,6 @@ for(int k=5;k<10;k++)
     }
         undoexe();
         removestr();
-         out_window();
-        memset(out,0,MAX);
     }
     else if(strcmp(command_seprate[0],"copy")==0)
     {
@@ -1784,8 +1370,37 @@ for(int k=5;k<10;k++)
     }
         undoexe();
         copy();
-         out_window();
-        memset(out,0,MAX);
+    }
+    else if(strcmp(command_seprate[0],"cut")==0)
+    {
+            if (!path_existance(command_seprate[2]))
+    {
+        printf("path is wrong!\n");
+        return;
+    }
+    if (!file_exsistance(command_seprate[2]))
+    {
+        printf("file is wrong\n");
+        return;
+    }
+    undoexe();
+    cut();
+
+    }
+    else if(strcmp(command_seprate[0],"pastestr")==0)
+    {
+                  if (!path_existance(command_seprate[2]))
+    {
+        printf("path is wrong!\n");
+        return;
+    }
+    if (!file_exsistance(command_seprate[2]))
+    {
+        printf("file is wrong\n");
+        return;
+    }
+    undoexe();
+    paste();
     }
     else if(strcmp(command_seprate[0],"find")==0)
     {
@@ -1844,8 +1459,6 @@ for(int k=5;k<10;k++)
     if(finstate==0 || finstate==100 || finstate==110 || finstate==10 || finstate==1000 || finstate==1 || finstate==1100)
     {
         find();
-         out_window();
-        memset(out,0,MAX);
     }
     else
     {
@@ -1907,10 +1520,7 @@ for(int k=5;k<10;k++)
 }
 if(finstate==0 || finstate==10 || finstate==1)
 {
-    undoexe();
     replace();
-     out_window();
-        memset(out,0,MAX);
 }
 else
 {
@@ -1970,8 +1580,6 @@ finstate=0;
     }
         
         grep(option);
-         out_window();
-        memset(out,0,MAX);
         start_file++;
 
         }
@@ -1997,16 +1605,11 @@ finstate=0;
         else if(depth==-1)
         {
             a_tree("./root",0);
-            out_window();
-        memset(out,0,MAX);
-            
         }
         
         else
         {
             tree_specific_depth("./root",0,depth);
-            out_window();
-        memset(out,0,MAX);
         }
     }
     else if(strcmp(command_seprate[0],"undo")==0)
@@ -2023,8 +1626,6 @@ finstate=0;
     }
         
         undo();
-        out_window();
-        memset(out,0,MAX);
 
     }
     else if(strcmp(command_seprate[0],"compare")==0)
@@ -2040,7 +1641,7 @@ finstate=0;
         printf("file1 is wrong\n");
         return;
     }
-        swap(command_seprate[1],command_seprate[2]);
+    swap(command_seprate[1],command_seprate[2]);
               if (!path_existance(command_seprate[2]))
     {
         printf("path2 is wrong\n!");
@@ -2052,29 +1653,26 @@ finstate=0;
         return;
     }
         compare(filen(command_seprate[1]),filen(command_seprate[2]));
-        out_window();
-        memset(out,0,MAX);
 
 
     }
     else if(strcmp(command_seprate[0],"auto-indent")==0)
     {
-       
+        
        swap(command_seprate[2],command_seprate[1]);
-               if (!path_existance())
+       
+         if (!path_existance(command_seprate[2]))
     {
         printf("path is wrong\n!");
         return;
     }
-    if (!file_exsistance())
+    if (!file_exsistance(command_seprate[2]))
     {
         printf("file is wrong\n");
         return;
     }
     swap(command_seprate[2],command_seprate[1]);
         auto_indent();
-        out_window();
-        memset(out,0,MAX);
         printf("autoindented\n");
     }
     
