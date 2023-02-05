@@ -87,6 +87,29 @@ int file_exsistance()
     }
     return 0;
 }
+int savechecking(char*fdir,dir)
+{
+    FILE*f=fopen(dir,"r");
+    FILE*ff=fopen(dir,"r");
+    char tek[MAX];
+    char tekk[MAX];
+    while(fgets(tek,MAX,file)!=NULL && fgets(tekk,MAX,ff)!=NULL)
+    {
+        if(strcmp(tek,tekk))
+        {
+            return 0;
+        }
+        if(feof(f) && !feof(ff))
+        {
+            return 0;
+        }
+        else if(feof(ff) && !feof(f))
+        {
+            return 0;
+        }
+    }
+    return 1;
+}
 void seprate()
 {
     int i = 0, j = 0, k = 0;
@@ -1684,16 +1707,567 @@ finstate=0;
     }
 
 }
+void graphicpart()
+{
+    int finalline;
+    int save=0;
+    int visual=0;
+    int normal=0;
+    int insert=0;
+    char dir[MAX];
+    char name_f[MAX];
+    char help[MAX];
+    int lastline;
+    int line_l[MAX];
+    strcat(name_f,"ndefined.txt")
+    strcat(dir,"./unsave/ndefined.txt");
+    int lastline=1;
+    int firstline=1;
+    int full_line=1;
+    int ycor=1;
+    int xcor=0;
+    char view[MAX][MAX];
+    for(int i=0;i<MAX;i++)
+    {
+        for(int j=0;j<MAX;j++)
+        {
+            view[i][j]=0;
+        }
+    }
+    FILE*f=fopen(dir,"r");
+    while(strcmp(command,exit))
+    {
+        system("cls");
+        lastline=1;
+        fseek(f,0,SEEK_SET);
+        memset(line_l,0,MAX*sizeof(int));
+        int flag1=1;
+        while(flag1)
+        {
+            if(fgets(help,MAX,f)==NULL || lastline-firstline<full_line)
+            {
+                flag1=0;
+                continue;
+            }
+            line_l[lastline-1]=strlen(help);
+            if(lastline>=firstline)
+            {
+                printf("%3d ",last_line);
+                if(lastline-firstline==ycor-1)
+                {
+                    if(!visual)
+                    {
+                        int i;
+                        for(i=0;help[i] !='\0';i++)
+                        {
+                            if(i==xcor && help{i+1}=='\0')
+                            {
+                                setBackgroundColor(LIGHTMAGENTA);
+                                putchar(' ');
+                                if(help[i]=='\n')
+                                {
+                                    putchar(help[i]);
+                                }
+                                setBackgroundColor(BLACK);
+                            }
+                            else if(xcor==i)
+                            {
+                                setBackgroundColor(LIGHTMAGENTA);
+                                putchar(help[i]);
+                                setBackgroundColor(BLACK);
+                            }
+                            else
+                            {
+                                putchar(help[i]);
+                            }
+                        }
+                    }
+                    else
+                
+                    {
+                        int i;
+                        for(int i=0;help[i]!='\0';i++)
+                        {
+                            if(i==xcor && help[i+1]='\0')
+                            {
+                                setBackgroundColor(LIGHTMAGENTA);
+                                putchar(' ');
+                                if(help[i]=='\n')
+                                {
+                                    putchar(help[i]);
+
+                                }
+                                setBackgroundColor(BLACK);
+                            }
+                            else if(xcor==i)
+                            {
+                                setBackgroundColor(LIGHTMAGENTA);
+                                putchar(help[i]);
+                                setBackgroundColor(BLACK);
+                            }
+                            else if(fpv>xcor && i>=lpv && i<fpv)
+                            {
+                                setBackgroundColor(GREEN);
+                                putchar(help[i]);
+                                setBackgroundColor(BLACK);
+                            }
+                            else if(fpv<xcor && i<=lpv && i>=fpv)
+                            {
+                                setBackgroundColor(GREEN);
+                                putchar(help[i]);
+                                setBackgroundColor(BLACK);
+
+                            }
+                            else
+                            {
+                                putchar[help[i]]
+
+                            }
+
+                            
+                        }
+                    }
+                }
+                else
+                {
+                    printf("%s",help);
+                }
+
+            }
+            lastline++;
+
+        }
+        finalline=lastline-1;
+        if(lastline-firstline<full_line)
+        {
+            setColor(RED);
+            putchar('\n');
+            int flag2=1;
+            while(flag2)
+            {
+                if(lastline-firstline<full_line)
+                {
+                    flag2=0;
+                    continue;
+                }
+                printf('~\n');
+                    lastline++;
+            }
+            setColor(WHITE);
+
+        }
+        putchar('\n');
+        if(normal)
+        {
+            setColor(BLACK);
+            if(save)
+            {
+                setBackgroundColor(LIGHTCYAN);
+                printf(" NORMAL ");
+                setBackgroundColor(GREY);
+                printf(" %s  ",name_f);
+                setBackgroundColor(BLACK);
+
+            }
+            else
+            {
+                setBackgroundColor(LIGHTCYAN);
+                printf(" NORMAL ");
+                setBackgroundColor(GREY);
+                printf(" %s + ",name_f);
+                setBackgroundColor(BLACK);
+
+            }
+            setColor(WHITE);
+            setBackgroundColor(GREY);
+            for(int i=0;i<163;i++)
+            {
+                putchar(' ');
+            }
+            putchar('\n');
+            setBackgroundColor(BLACK);
+            char input=getch();
+            
+            switch(input)
+            {
+               case':': 
+                
+                reset();
+                putchar(':');
+                int i=0,flag3=1;
+                while(flag3)
+                {
+                    if((input=getchar()) == '\n')
+                    {
+                        flag3=0;
+                        continue;
+                    }
+                    command[i]=input;
+                    i++;
+
+                }
+                seprate();
+                execute_f();
+                if(out[0]!='\0')
+                {
+                    if(strcmp(out,"invalid command")==0)
+                    {
+                        system("cls");
+                        system("color CE");
+                        gotoxy(100,25);
+                        printf("invalid command");
+                        getch();
+                        system("color 07");
+                        continue;
+                    }
+                    fclose(f);
+                    memset(dir,0,MAX);
+                    strcat(dir,"./unsave/ndefined");
+                    f=fopen(dir,"w");
+                    fputs(out,f);
+                    fclose(f);
+                    f=fopen(dir,"r");
+                    firstline=1;
+                    finalline=40;
+                }
+                break;
+                case 'w':
+                if(firstline>1 && ycor==5)
+                {
+                    
+                    
+                        firstline=firstline-1;
+                    
+                }
+                else if(ycor>1)
+                {
+                    ycor=ycor-1;
+                }
+                while(xcor>(line_l[ycor-1+firstline-1]-1))
+                {
+                    xcor--;
+                }
+                break;
+                case 'a':
+                if(xcor>0)
+                {
+                    xcor--;
+                   
+                }
+                break;
+                case 'd':
+                if(xcor<(line_l[ycor-1+firstline-1]-1))
+                {
+                    xcor++;
+                }
+                break;
+                case 's':
+                if(ycor==36 && finalline-firstline>36)
+                {
+                    firstline++;
+                }
+                else if(line_l[ycor-1+firstline-1]-1>xcor)
+                {
+                    xcor--;
+                }
+                break;
+                case 'p':
+                reset();
+                strcat(command_seprate[0],"pastestr");
+                strcat(command_seprate[2],dir);
+                strcat(command_seprate[1],"--file");
+                strcat(command_seprate[3],"--pos");
+                sprintf(help,"%d",ycor);
+                strcat(command_seprate[4],help);
+                sprintf(help,":%d",xcor);
+                strcat(command_seprate[4],help);
+                pastestr();
+                break;
+                case 'i':
+                insert=1;
+                normal=0;
+                visual=0;
+                break;
+                case 'v':
+                insert=0;
+                normal=0;
+                visual=1;
+                fpv=xcor;
+                break;
+                default:
+                break;
+                }
+            
+        }
+        else if(insert)
+        {
+             setColor(BLACK);
+            if(save)
+            {
+                setBackgroundColor(LIGHTCYAN);
+                printf(" INSERT ");
+                setBackgroundColor(GREY);
+                printf(" %s  ",name_f);
+                setBackgroundColor(BLACK);
+
+            }
+            else
+            {
+                setBackgroundColor(LIGHTCYAN);
+                printf(" INSERT ");
+                setBackgroundColor(GREY);
+                printf(" %s + ",name_f);
+                setBackgroundColor(BLACK);
+
+            }
+             setColor(WHITE);
+            setBackgroundColor(GREY);
+            for(int i=0;i<163;i++)
+            {
+                putchar(' ');
+            }
+            putchar('\n');
+            setBackgroundColor(BLACK);
+            char input=getch();
+            
+            switch(input)
+            {
+                case 27:
+                normal=1;
+                visual=0;
+                insert=0;
+                break;
+                case 8:
+                reset();
+                
+                sprintf(help,"%d",ycor);
+                strcat(command_seprate[4],help);
+                sprintf(help,":%d",xcor);
+                strcat(command_seprate[4],help);
+                strcat(command_seprate[3],"--pos");
+                strcat(command_seprate[0],"removestr");
+                strcat(command_seprate[1],"--file");
+                strcat(command_seprate[2],dir);
+                strcat(command_seprate[5],"-size");
+                strcat(command_seprate[7],'-b');
+                sprintf(command_seprate[6],"%d",1);
+                removestr();
+                if(help_clipboard[0]=='\n')
+                {
+                    if(ycor==5 && firstline>1)
+                    {
+                        firstline=firstline-1;
+                    }
+                    else if(ycor>1)
+                    {
+                        ycor--;
+                    }
+                    xcor=line_l[ycor-1+firstline-1]-1;
+                   
+                    
+                    
+                }
+                else
+                {
+                    xcor=xcor-1;
+                }
+                break;
+                default:
+                reset();
+                if(input=='\r')
+                {
+                    command_seprate[4][0]='\n';
+
+                }
+                else
+                {
+                    command_seprate[4][0]=input;
+                }
+                strcat(command_seprate[0],"insertstr");
+                strcat(command_seprate[1],"--file");
+                strcat(command_seprate[2],dir);
+                strcat(command_seprate[3],"--str");
+                strcat(command_seprate[5],"--pos");
+                sprintf(help,"%d",ycor);
+                strcat(command_seprate[6],help);
+                sprintf(help,":%d",xcor);
+                strcat(command_seprate[6],help);
+                insertstr();
+                if(input=='\r')
+                {
+                    if(ycor==36 && finalline-firstline>36)
+                    {
+                        firstline++;
+                    }
+                    else
+                    {
+                        ycor++;
+                    }
+                    xcor=0;
+                }
+                
+                else
+                {
+                    xcor++;
+                }
+                break;
+                
+            }
+
+        }
+
+        else if(visual)
+        {
+             setColor(BLACK);
+            if(save)
+            {
+                setBackgroundColor(LIGHTCYAN);
+                printf(" VISUAL ");
+                setBackgroundColor(GREY);
+                printf(" %s  ",name_f);
+                setBackgroundColor(BLACK);
+
+            }
+            else
+            {
+                setBackgroundColor(LIGHTCYAN);
+                printf(" VISUAL ");
+                setBackgroundColor(GREY);
+                printf(" %s + ",name_f);
+                setBackgroundColor(BLACK);
+
+            }
+             setColor(WHITE);
+            setBackgroundColor(GREY);
+            for(int i=0;i<163;i++)
+            {
+                putchar(' ');
+            }
+            putchar('\n');
+            setBackgroundColor(BLACK);
+            char input=getch();
+            switch(input)
+            {
+                 case 'w':
+                if(firstline>1 && ycor==5)
+                {
+                    
+                    
+                        firstline=firstline-1;
+                    
+                }
+                else if(ycor>1)
+                {
+                    ycor=ycor-1;
+                }
+                while(xcor>(line_l[ycor-1+firstline-1]-1))
+                {
+                    xcor--;
+                }
+                break;
+                case 'a':
+                if(xcor>0)
+                {
+                    xcor--;
+                   
+                }
+                break;
+                case 'd':
+                if(xcor<(line_l[ycor-1+firstline-1]-1))
+                {
+                    xcor++;
+                }
+                break;
+                case 's':
+                if(ycor==36 && finalline-firstline>36)
+                {
+                    firstline++;
+                }
+                else if(line_l[ycor-1+firstline-1]-1>xcor)
+                {
+                    xcor--;
+                }
+                break;
+                case c:
+                reset();
+                 sprintf(help,"%d",ycor);
+                strcat(command_seprate[4],help);
+                sprintf(help,":%d",fpv);
+                strcat(command_seprate[4],help);
+                strcat(command_seprate[3],"--pos");
+                strcat(command_seprate[0],"copy");
+                strcat(command_seprate[1],"--file");
+                strcat(command_seprate[2],dir);
+                strcat(command_seprate[5],"-size");
+                if(lpv<fpv)
+                {
+                    strcat(command_seprate[7],'-b');
+                }
+                else if(lpv>fpv)
+                {
+                    strcat(command_seprate[7],'-f');
+                }
+                
+                sprintf(command_seprate[6],"%d",abs(fpv-lpv));
+                copy();
+                normal=1;
+                visual=0;
+                insert=0;
+                break;
+                case 'x':
+                reset();
+                 sprintf(help,"%d",ycor);
+                strcat(command_seprate[4],help);
+                sprintf(help,":%d",fpv);
+                strcat(command_seprate[4],help);
+                strcat(command_seprate[3],"--pos");
+                strcat(command_seprate[0],"copy");
+                strcat(command_seprate[1],"--file");
+                strcat(command_seprate[2],dir);
+                strcat(command_seprate[5],"-size");
+                if(lpv<fpv)
+                {
+                    strcat(command_seprate[7],'-b');
+                }
+                else if(lpv>fpv)
+                {
+                    strcat(command_seprate[7],'-f');
+                }
+                
+                sprintf(command_seprate[6],"%d",abs(fpv-lpv));
+                cut();
+                normal=1;
+                visual=0;
+                insert=0;
+                break;
+                case 27:
+                normal=1;
+                visual=0;
+                insert=0;
+                default:
+                break;
+
+
+            }
+        }
+
+
+    }
+    system("cls");
+    system("color F0");
+    gotoxy(100,25);
+    printf("good!!!");
+    getch();
+    fclose(f);
+}
+
+
+
 
 int main()
 {
-    printf("enter your command!\n");
-    while (strcmp(command, "exit"))
-    {
-        reset();
-        gets(command);
-        seprate();
+    graphicpart();
         
-        execute_f();
-    }
+        
+    
 }
