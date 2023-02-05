@@ -10,6 +10,7 @@
 #include <errno.h>
 #include <conio.h>
 #include <io.h>
+#include"rlutil.h"
 
 #define MAX 1000
 int finstate=0;
